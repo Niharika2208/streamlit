@@ -83,7 +83,7 @@ if pdf_file is not None:
                         img_bytes = img_file.read()
 
                     # Provide download button for the cropped image
-                    #st.download_button("Download Cropped Image", img_bytes, file_name="cropped_image.png", mime="image/png")
+                    st.download_button("Download Cropped Image", img_bytes, file_name="cropped_image.png", mime="image/png")
 
             except Exception as e:
                 st.error(f"Error: {e}")
@@ -126,16 +126,16 @@ if pil_image is not None:
     Processed_Image = Image.fromarray(resized_gray)
     st.write('')
     st.markdown(f'<i class="fa-solid fa-cube" style="margin-right: 10px; font-size: 20px;"></i> <span style="font-size: 24px; color: #3573b3;">**Processed Image**</span>', unsafe_allow_html=True)
-    #st.image(Processed_Image, use_column_width='auto')
+    st.image(Processed_Image, use_column_width='auto')
 
     n_width, n_height = Processed_Image.size
-    #st.write("Image Size (Width x Height):", n_width, "x", n_height)
+    st.write("Image Size (Width x Height):", n_width, "x", n_height)
 
 
     rotated_image = rotate_image(Processed_Image, -90)
     st.write('')
     st.markdown(f'<i class="fa-solid fa-cube" style="margin-right: 10px; font-size: 20px;"></i> <span style="font-size: 24px; color: #3573b3;">**Rotated Image**</span>', unsafe_allow_html=True)
-    #st.image(rotated_image, use_column_width='auto')
+    st.image(rotated_image, use_column_width='auto')
 
 
 
