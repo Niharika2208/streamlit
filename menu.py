@@ -4,7 +4,7 @@ import streamlit as st
 def authenticated_menu():
     # Show a navigation menu for authenticated users
     st.sidebar.page_link("Sign_In.py", label="Sign In/ Sign Up")
-    if st.session_state.role in ["admin"]:
+    if st.session_state.role in ["admin", "user"]:
         st.sidebar.page_link("pages/Home.py", label="Home")
         st.sidebar.page_link("pages/1_General_Information.py", label="General Information")
         st.sidebar.page_link("pages/Crop_Assist.py", label="Crop Assist")
