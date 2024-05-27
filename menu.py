@@ -13,7 +13,7 @@ def authenticated_menu():
 
 def unauthenticated_menu():
     # Show a navigation menu for unauthenticated users
-    st.sidebar.page_link("Sign_In.py", label="Log in")
+    st.sidebar.page_link("Sign_In.py", label="Sign In/Sign Up")
 
 
 def menu():
