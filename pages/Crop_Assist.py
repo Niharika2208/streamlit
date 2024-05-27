@@ -12,6 +12,7 @@ import easyocr
 import pandas as pd
 import cv2
 import time
+from menu import menu
 
 fa_css = '''
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
@@ -23,6 +24,8 @@ st.write(fa_css, unsafe_allow_html=True)
 reader = easyocr.Reader(['en'])
 
 st.title("Dimension Detection!")
+menu()
+
 
 # Initialize session state
 if 'crop_button_clicked' not in st.session_state:
