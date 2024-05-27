@@ -2,6 +2,7 @@
 import matplotlib.pyplot as plt
 import streamlit as st
 import matplotlib.image as mpimg
+from menu import menu
 
 st.set_page_config(
     page_title="Home page",
@@ -9,7 +10,7 @@ st.set_page_config(
     layout="centered")
 
 
-# SurViZ logo
+menu()
 st.image('logo_ata.png')
 
 # Main Description
