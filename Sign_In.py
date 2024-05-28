@@ -100,10 +100,10 @@ else:
         on_change=set_role,
     )
 
-    if st.button("Logout"):
-        st.session_state.logged_in = False
-        st.session_state.user = None
-        st.session_state.role = None
-        st.success("Logged out successfully!")
+    #if st.button("Logout"):
+    #    st.session_state.logged_in = False
+     #   st.session_state.user = None
+      #  st.session_state.role = None
+       # st.success("Logged out successfully!")
 
 #menu()  # Render the dynamic menu!
