@@ -1,7 +1,6 @@
 import streamlit as st
 from menu import menu
-from firebase_admin import auth, credentials
-import firebase_admin
+from firebase_admin import auth, credentials, initialize_app, get_apps
 import requests
 
 # Initialize Firebase
