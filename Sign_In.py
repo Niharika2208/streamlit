@@ -87,8 +87,8 @@ if not st.session_state.logged_in:
         new_password = st.text_input("New Password", type="password")
         if st.button("Register"):
             if register_user(new_email, new_password):
-                st.success("Registered and logged in successfully!")
-                redirect_to_home()
+                st.success("Registeration successful. You can now login!")
+                # redirect_to_home()
             else:
                 st.error("Registration failed")
 
