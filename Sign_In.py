@@ -1,12 +1,15 @@
 import streamlit as st
 from menu import menu
-from firebase_admin import auth, credentials, initialize_app, get_apps
+from firebase_admin import auth, credentials, initialize_app
 import requests
 
 # Initialize Firebase
-if not get_apps():
+try:
     cred = credentials.Certificate('ata-project-a5bd3-b43dda61efbe.json')
     initialize_app(cred)
+except ValueError:
+    pass
+   
 
 
 # Firebase API endpoint for client-side authentication
