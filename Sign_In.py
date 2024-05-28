@@ -66,8 +66,7 @@ def register_user(email, password):
 
 def redirect_to_home():
     # Redirect to Home page
-    st.experimental_rerun()
-
+    st.page_link("pages/Home.py", label="Home")
 if not st.session_state.logged_in:
     st.title("Login or Register")
 
