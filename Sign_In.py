@@ -92,13 +92,13 @@ if not st.session_state.logged_in:
             else:
                 st.error("Registration failed")
 
-else:
-    st.selectbox(
-        "Select your role:",
-        [None, "user", "admin"],
-        key="_role",
-        on_change=set_role,
-    )
+#else:
+ #   st.selectbox(
+ #       "Select your role:",
+ #       [None, "user", "admin"],
+ #       key="_role",
+ #       on_change=set_role,
+ #   )
 
     #if st.button("Logout"):
     #    st.session_state.logged_in = False
