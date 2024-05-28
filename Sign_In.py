@@ -5,7 +5,7 @@ import firebase_admin
 import requests
 
 # Initialize Firebase
-cred = credentials.Certificate('path/to/serviceAccountKey.json')
+cred = credentials.Certificate('ata-project-a5bd3-b43dda61efbe.json')
 firebase_admin.initialize_app(cred)
 
 # Firebase API endpoint for client-side authentication
