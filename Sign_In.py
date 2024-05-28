@@ -75,10 +75,10 @@ if not st.session_state.logged_in:
     with tab1:
         email = st.text_input("Email")
         password = st.text_input("Password", type="password")
-        if st.button("Login"):
+        if st.page_link("pages/Home.py", label="Login"):
             if login_user(email, password):
                 st.success("Logged in successfully!")
-                redirect_to_home()
+                #redirect_to_home()
             else:
                 st.error("Invalid email or password")
 
