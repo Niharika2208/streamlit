@@ -82,4 +82,4 @@ def login_app():
                 else:
                     st.error("Registration failed")
 
-    menu()  # Render the dynamic menu!
+   # menu()  # Render the dynamic menu!
