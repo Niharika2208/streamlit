@@ -1,9 +1,8 @@
 import streamlit as st
-import requests
 from firebase_admin import auth, credentials, initialize_app
-import firebase_admin
+import requests
 
-# Initialize Firebase
+# Initialize Firebase app if not already initialized
 try:
     cred = credentials.Certificate('ata-project-a5bd3-b43dda61efbe.json')
     initialize_app(cred)
@@ -15,13 +14,22 @@ FIREBASE_API_KEY = "AIzaSyBDHSIurYQP9JZcGz5v0vBOkydT9cPChFg"
 FIREBASE_AUTH_URL = f"https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key={FIREBASE_API_KEY}"
 FIREBASE_SIGNUP_URL = f"https://identitytoolkit.googleapis.com/v1/accounts:signUp?key={FIREBASE_API_KEY}"
 
-# Initialize st.session_state variables if not already set
-if "logged_in" not in st.session_state:
-    st.session_state.logged_in = False
+st.set_option("client.showSidebarNavigation", False)
+
+# Initialize st.session_state.role to None
 if "role" not in st.session_state:
     st.session_state.role = None
+if "logged_in" not in st.session_state:
+    st.session_state.logged_in = False
 if "user" not in st.session_state:
     st.session_state.user = None
+
+# Retrieve the role from Session State to initialize the widget
+st.session_state._role = st.session_state.role
+
+def set_role():
+    # Callback function to save the role selection to Session State
+    st.session_state.role = st.session_state._role
 
 def login_user(email, password):
     payload = {
@@ -51,7 +59,12 @@ def register_user(email, password):
     if response.status_code == 200:
         return login_user(email, password)
     else:
+        st.error(f"Registration failed: {response.json()}")  # Print detailed error response
         return False
+
+def redirect_to_home():
+    # Redirect to Home page by setting query parameters
+    st.experimental_set_query_params(page="home")
 
 def login_app():
     if not st.session_state.logged_in:
@@ -65,8 +78,7 @@ def login_app():
             if st.button("Login"):
                 if login_user(email, password):
                     st.success("Logged in successfully!")
-                    st.experimental_set_query_params(page="Home")
-                    st.experimental_rerun()
+                    redirect_to_home()
                 else:
                     st.error("Invalid email or password")
 
@@ -76,9 +88,22 @@ def login_app():
             if st.button("Register"):
                 if register_user(new_email, new_password):
                     st.success("Registered and logged in successfully!")
-                    st.experimental_set_query_params(page="Home")
-                    st.experimental_rerun()
+                    redirect_to_home()
                 else:
                     st.error("Registration failed")
 
-# Note: Menu function is not called here for the login page
+    else:
+        st.selectbox(
+            "Select your role:",
+            [None, "user", "admin"],
+            key="_role",
+            on_change=set_role,
+        )
+
+        if st.button("Logout"):
+            st.session_state.logged_in = False
+            st.session_state.user = None
+            st.session_state.role = None
+            st.success("Logged out successfully!")
+
+    menu()  # Render the dynamic menu!
