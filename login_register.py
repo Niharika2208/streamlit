@@ -16,7 +16,7 @@ FIREBASE_SIGNUP_URL = f"https://identitytoolkit.googleapis.com/v1/accounts:signU
 
 st.set_option("client.showSidebarNavigation", False)
 
-# Initialize st.session_state.logged_in and st.session_state.user if not already set
+# Initialize st.session_state variables if not already set
 if "logged_in" not in st.session_state:
     st.session_state.logged_in = False
 if "user" not in st.session_state:
@@ -53,8 +53,9 @@ def register_user(email, password):
         return False
 
 def redirect_to_home():
-    # Redirect to Home page by setting query parameters
+    # Redirect to Home page by setting query parameters and rerun the app
     st.experimental_set_query_params(page="home")
+    st.experimental_rerun()
 
 def login_app():
     if not st.session_state.logged_in:
@@ -82,4 +83,8 @@ def login_app():
                 else:
                     st.error("Registration failed")
 
-    menu()  # Render the dynamic menu!
+    # Remove the call to `menu()` if you don't need it
+    # menu()  # Render the dynamic menu!
+
+if __name__ == "__main__":
+    login_app()
