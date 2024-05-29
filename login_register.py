@@ -1,16 +1,13 @@
 import streamlit as st
-from menu import menu
 from firebase_admin import auth, credentials, initialize_app
 import requests
 
-# Initialize Firebase
+# Initialize Firebase app if not already initialized
 try:
     cred = credentials.Certificate('ata-project-a5bd3-b43dda61efbe.json')
     initialize_app(cred)
 except ValueError:
-    pass
-   
-
+    pass  # Firebase app already initialized
 
 # Firebase API endpoint for client-side authentication
 FIREBASE_API_KEY = "AIzaSyBDHSIurYQP9JZcGz5v0vBOkydT9cPChFg"
@@ -62,48 +59,51 @@ def register_user(email, password):
     if response.status_code == 200:
         return login_user(email, password)
     else:
+        st.error(f"Registration failed: {response.json()}")  # Print detailed error response
         return False
 
 def redirect_to_home():
-    # Redirect to Home page
-    st.page_link("pages/Home.py", label="Home")
-if not st.session_state.logged_in:
-    st.title("Login or Register")
+    # Redirect to Home page by setting query parameters
+    st.experimental_set_query_params(page="home")
 
-    tab1, tab2 = st.tabs(["Login", "Register"])
+def login_app():
+    if not st.session_state.logged_in:
+        st.title("Login or Register")
 
-    with tab1:
-        email = st.text_input("Email")
-        password = st.text_input("Password", type="password")
-        if st.button("Login"):
-            if login_user(email, password):
-                st.success("Logged in successfully!")
-                redirect_to_home()
-            else:
-                st.error("Invalid email or password")
+        tab1, tab2 = st.tabs(["Login", "Register"])
 
-    with tab2:
-        new_email = st.text_input("New Email")
-        new_password = st.text_input("New Password", type="password")
-        if st.button("Register"):
-            if register_user(new_email, new_password):
-                st.success("Registeration successful. You can now login!")
-                # redirect_to_home()
-            else:
-                st.error("Registration failed")
+        with tab1:
+            email = st.text_input("Email")
+            password = st.text_input("Password", type="password")
+            if st.button("Login"):
+                if login_user(email, password):
+                    st.success("Logged in successfully!")
+                    redirect_to_home()
+                else:
+                    st.error("Invalid email or password")
 
-#else:
- #   st.selectbox(
- #       "Select your role:",
- #       [None, "user", "admin"],
- #       key="_role",
- #       on_change=set_role,
- #   )
+        with tab2:
+            new_email = st.text_input("New Email")
+            new_password = st.text_input("New Password", type="password")
+            if st.button("Register"):
+                if register_user(new_email, new_password):
+                    st.success("Registered and logged in successfully!")
+                    redirect_to_home()
+                else:
+                    st.error("Registration failed")
 
-    #if st.button("Logout"):
-    #    st.session_state.logged_in = False
-     #   st.session_state.user = None
-      #  st.session_state.role = None
-       # st.success("Logged out successfully!")
+    else:
+        st.selectbox(
+            "Select your role:",
+            [None, "user", "admin"],
+            key="_role",
+            on_change=set_role,
+        )
 
-#menu()  # Render the dynamic menu!
+        if st.button("Logout"):
+            st.session_state.logged_in = False
+            st.session_state.user = None
+            st.session_state.role = None
+            st.success("Logged out successfully!")
+
+    menu()  # Render the dynamic menu!
