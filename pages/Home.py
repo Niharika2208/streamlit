@@ -4,11 +4,15 @@ import matplotlib.image as mpimg
 from menu import menu
 
 def main():
-    #menu()
+    
     st.set_page_config(
         page_title="Home page",
         page_icon="👋",
         layout="centered")
+
+    menu()
+
+    
 
     # SurViZ logo
     st.image('logo_ata.png')
