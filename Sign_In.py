@@ -1,5 +1,7 @@
 import streamlit as st
+from menu import menu
 
+menu()
 # Retrieve query parameters
 query_params = st.experimental_get_query_params()
 
