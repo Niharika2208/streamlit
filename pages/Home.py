@@ -1,25 +1,25 @@
-
+ 
 import matplotlib.pyplot as plt
 import streamlit as st
 import matplotlib.image as mpimg
 from menu import menu
 
-st.set_page_config(
+
+def main():
+    st.set_page_config(
     page_title="Home page",
     page_icon="👋",
     layout="centered")
+    menu()
+    st.image('logo_ata.png')
 
+    # Main Description
+    st.markdown("## 👋 Welcome to the Dimension Detection tool!")
+    st.markdown("Developed by the Team Quadratech")
+    st.markdown("The app is still under development.")
 
-menu()
-st.image('logo_ata.png')
-
-# Main Description
-st.markdown("## 👋 Welcome to the Dimension Detection tool!")
-st.markdown("Developed by the Team Quadratech")
-st.markdown("The app is still under development.")
-
-# Description of the features. 
-st.markdown(
+    # Description of the features. 
+    st.markdown(
     """
     ### Select on the left panel what you want to explore:
 
@@ -32,4 +32,11 @@ st.markdown(
     \n  
 
     """
-)
+    )
+
+
+if __name__ == "__main__":
+    main()
+
+
+
