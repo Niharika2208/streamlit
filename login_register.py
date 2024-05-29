@@ -106,4 +106,4 @@ def login_app():
             st.session_state.role = None
             st.success("Logged out successfully!")
 
-    menu()  # Render the dynamic menu!
+   # menu()  # Render the dynamic menu!
