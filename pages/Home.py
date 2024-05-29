@@ -10,7 +10,6 @@ def main():
         page_icon="👋",
         layout="centered") 
 
-    menu()
 
     # SurViZ logo
     st.image('logo_ata.png')
