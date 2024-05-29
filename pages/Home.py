@@ -4,6 +4,7 @@ import streamlit as st
 import matplotlib.image as mpimg
 from menu import menu
 
+menu()
 
 def main():
     st.set_page_config(
@@ -37,7 +38,6 @@ def main():
 
 if __name__ == "__main__":
  main()
- menu()
    
 
 
