@@ -92,6 +92,12 @@ def login_app():
                 else:
                     st.error("Registration failed")
 
+     if st.button("Logout"):
+           st.session_state.logged_in = False
+            st.session_state.user = None
+            st.session_state.role = None
+          st.success("Logged out successfully!")
+
    # else:
    ##     st.selectbox(
      #       "Select your role:",
@@ -100,10 +106,6 @@ def login_app():
      #       on_change=set_role,
      #   )
 
-      #  if st.button("Logout"):
-      #      st.session_state.logged_in = False
-      #      st.session_state.user = None
-      #      st.session_state.role = None
-      #      st.success("Logged out successfully!")
+         
 
    # menu()  # Render the dynamic menu!
