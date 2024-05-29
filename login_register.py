@@ -1,8 +1,9 @@
 import streamlit as st
-from firebase_admin import auth, credentials, initialize_app
 import requests
+from firebase_admin import auth, credentials, initialize_app
+import firebase_admin
 
-# Initialize Firebase app if not already initialized
+# Initialize Firebase
 try:
     cred = credentials.Certificate('ata-project-a5bd3-b43dda61efbe.json')
     initialize_app(cred)
@@ -14,11 +15,11 @@ FIREBASE_API_KEY = "AIzaSyBDHSIurYQP9JZcGz5v0vBOkydT9cPChFg"
 FIREBASE_AUTH_URL = f"https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key={FIREBASE_API_KEY}"
 FIREBASE_SIGNUP_URL = f"https://identitytoolkit.googleapis.com/v1/accounts:signUp?key={FIREBASE_API_KEY}"
 
-st.set_option("client.showSidebarNavigation", False)
-
 # Initialize st.session_state variables if not already set
 if "logged_in" not in st.session_state:
     st.session_state.logged_in = False
+if "role" not in st.session_state:
+    st.session_state.role = None
 if "user" not in st.session_state:
     st.session_state.user = None
 
@@ -35,6 +36,7 @@ def login_user(email, password):
         user_info = auth.verify_id_token(id_token)
         st.session_state.user = user_info
         st.session_state.logged_in = True
+        st.session_state.role = "user"  # Default role, customize as needed
         return True
     else:
         return False
@@ -49,13 +51,7 @@ def register_user(email, password):
     if response.status_code == 200:
         return login_user(email, password)
     else:
-        st.error(f"Registration failed: {response.json()}")  # Print detailed error response
         return False
-
-def redirect_to_home():
-    # Redirect to Home page by setting query parameters and rerun the app
-    st.experimental_set_query_params(page="home")
-    #st.experimental_rerun()
 
 def login_app():
     if not st.session_state.logged_in:
@@ -69,7 +65,8 @@ def login_app():
             if st.button("Login"):
                 if login_user(email, password):
                     st.success("Logged in successfully!")
-                    redirect_to_home()
+                    st.experimental_set_query_params(page="Home")
+                    st.experimental_rerun()
                 else:
                     st.error("Invalid email or password")
 
@@ -79,12 +76,9 @@ def login_app():
             if st.button("Register"):
                 if register_user(new_email, new_password):
                     st.success("Registered and logged in successfully!")
-                    redirect_to_home()
+                    st.experimental_set_query_params(page="Home")
+                    st.experimental_rerun()
                 else:
                     st.error("Registration failed")
 
-    # Remove the call to `menu()` if you don't need it
-    # menu()  # Render the dynamic menu!
-
-if __name__ == "__main__":
-    login_app()
+# Note: Menu function is not called here for the login page
