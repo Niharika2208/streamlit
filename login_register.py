@@ -65,7 +65,7 @@ def register_user(email, password):
 def redirect_to_home():
     # Redirect to Home page by setting query parameters
     st.experimental_set_query_params(page="home")
-    st.experimental_rerun()
+    #st.experimental_rerun()
 
 def login_app():
     if not st.session_state.logged_in:
