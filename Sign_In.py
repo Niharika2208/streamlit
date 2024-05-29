@@ -1,5 +1,6 @@
 import streamlit as st
-from pages import Home
+import pages.Home
+
 
 # Retrieve query parameters
 query_params = st.experimental_get_query_params()
