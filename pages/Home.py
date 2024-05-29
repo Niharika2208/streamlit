@@ -9,7 +9,7 @@ def main():
         layout="centered")
 
     # SurViZ logo
-    st.image('logo_ata.png.png')
+    st.image('logo_ata.png')
 
     # Main Description
     st.markdown("## 👋 Welcome to the Dimension Detection tool!")
