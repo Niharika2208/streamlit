@@ -18,7 +18,7 @@ st.set_option("client.showSidebarNavigation", False)
 
 # Initialize st.session_state.logged_in and st.session_state.user if not already set
 if "logged_in" not in st.session_state:
-    st.session_state.logged_in = True
+    st.session_state.logged_in = False
 if "user" not in st.session_state:
     st.session_state.user = None
 
@@ -57,6 +57,9 @@ def redirect_to_home():
     st.experimental_set_query_params(page="home")
 
 def login_app():
+    if "logged_in" not in st.session_state:
+        st.session_state.logged_in = False
+        
     if not st.session_state.logged_in:
         st.title("Login or Register")
 
