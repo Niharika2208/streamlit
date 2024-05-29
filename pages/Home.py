@@ -8,11 +8,7 @@ def main():
     st.set_page_config(
         page_title="Home page",
         page_icon="👋",
-        layout="centered")
-
-    menu()
-
-    
+        layout="centered")    
 
     # SurViZ logo
     st.image('logo_ata.png')
