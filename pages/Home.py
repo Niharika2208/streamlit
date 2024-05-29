@@ -4,7 +4,7 @@ import matplotlib.image as mpimg
 from menu import menu
 
 def main():
-    menu()
+    #menu()
     st.set_page_config(
         page_title="Home page",
         page_icon="👋",
