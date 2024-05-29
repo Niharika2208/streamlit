@@ -16,20 +16,11 @@ FIREBASE_SIGNUP_URL = f"https://identitytoolkit.googleapis.com/v1/accounts:signU
 
 st.set_option("client.showSidebarNavigation", False)
 
-# Initialize st.session_state.role to None
-if "role" not in st.session_state:
-    st.session_state.role = None
+# Initialize st.session_state.logged_in and st.session_state.user if not already set
 if "logged_in" not in st.session_state:
     st.session_state.logged_in = False
 if "user" not in st.session_state:
     st.session_state.user = None
-
-# Retrieve the role from Session State to initialize the widget
-st.session_state._role = st.session_state.role
-
-def set_role():
-    # Callback function to save the role selection to Session State
-    st.session_state.role = st.session_state._role
 
 def login_user(email, password):
     payload = {
@@ -44,7 +35,6 @@ def login_user(email, password):
         user_info = auth.verify_id_token(id_token)
         st.session_state.user = user_info
         st.session_state.logged_in = True
-        st.session_state.role = "user"  # Default role, customize as needed
         return True
     else:
         return False
@@ -92,18 +82,4 @@ def login_app():
                 else:
                     st.error("Registration failed")
 
-    else:
-        st.selectbox(
-            "Select your role:",
-            [None, "user", "admin"],
-            key="_role",
-            on_change=set_role,
-        )
-
-        if st.button("Logout"):
-            st.session_state.logged_in = False
-            st.session_state.user = None
-            st.session_state.role = None
-            st.success("Logged out successfully!")
-
-   # menu()  # Render the dynamic menu!
+    menu()  # Render the dynamic menu!
