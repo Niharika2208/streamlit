@@ -3,15 +3,14 @@ import streamlit as st
 def authenticated_menu():
     # Show a navigation menu for authenticated users
     st.sidebar.markdown("### Navigation")
-    st.sidebar.markdown("[Home](pages/Home.py)")
-    st.sidebar.markdown("[General Information](pages/1_General_Information.py)")
-    st.sidebar.markdown("[Crop Assist](pages/Crop_Assist.py)")
-    st.sidebar.markdown("[Dimension Manager](pages/Dimension_Manager.py)")
-    st.sidebar.markdown("[Sign Out](Sign_In.py)")
+    st.sidebar.markdown("[Home](Home)")
+    st.sidebar.markdown("[General Information](1_General_Information)")
+    st.sidebar.markdown("[Crop Assist](Crop_Assist)")
+    st.sidebar.markdown("[Dimension Manager](Dimension_Manager)")
 
 def unauthenticated_menu():
     # Show a navigation menu for unauthenticated users
-    st.sidebar.markdown("[Sign In/Sign Up](Sign_In.py)")
+    st.sidebar.markdown("[Sign In/Sign Up](Sign_In)")
 
 def menu():
     # Determine if a user is logged in or not, then show the correct
