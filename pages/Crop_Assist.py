@@ -30,10 +30,7 @@ reader = easyocr.Reader(['en'])
 st.title("Dimension Detection!")
 #menu()
 
-dimensions = st.sidebar.multiselect(
-    "Select the Dimension",
-     ["Length", "Width"]
-    )
+
 
 # Initialize session state
 if 'crop_button_clicked' not in st.session_state:
@@ -41,6 +38,11 @@ if 'crop_button_clicked' not in st.session_state:
 
 pdf_file = st.sidebar.file_uploader("Upload a PDF file", type="pdf")
 page_number = st.sidebar.number_input("Enter the page number:", min_value=1, format="%d", value=1)
+
+dimensions = st.sidebar.multiselect(
+    "Select the Dimension",
+     ["Length", "Width"]
+    )
 
 img_bytes = None
 pil_image = None 
