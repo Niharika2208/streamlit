@@ -8,7 +8,9 @@ from menu import menu
 #     page_icon="👋",
 #     layout="centered") 
        
-
+st.sidebar.page_link("pages/1_General_Information.py", label="General Information")
+st.sidebar.page_link("pages/Crop_Assist.py", label="Crop Assist")
+st.sidebar.page_link("pages/Dimension_Manager.py", label="Dimension Manager")
 
 def main():
 
