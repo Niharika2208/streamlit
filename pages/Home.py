@@ -3,10 +3,10 @@ import streamlit as st
 import matplotlib.image as mpimg
 from menu import menu
 
-st.set_page_config(
-     page_title="Home page",
-     page_icon="👋",
-     layout="centered") 
+#st.set_page_config(
+#     page_title="Home page",
+#     page_icon="👋",
+#     layout="centered") 
        
 
 
