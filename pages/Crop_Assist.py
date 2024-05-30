@@ -30,6 +30,14 @@ reader = easyocr.Reader(['en'])
 st.title("Dimension Detection!")
 #menu()
 
+dimensions = st.sidebar.multiselect(
+    "Select the telescopes",
+     list(info.keys()),
+     default=["Length", "Width"]
+    )
+
+if len(dimensions) == 0:
+    st.markdown('## Please select at least one dimension')
 
 # Initialize session state
 if 'crop_button_clicked' not in st.session_state:
