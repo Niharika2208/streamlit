@@ -32,8 +32,7 @@ st.title("Dimension Detection!")
 
 dimensions = st.sidebar.multiselect(
     "Select the telescopes",
-     list(info.keys()),
-     default=["Length", "Width"]
+     ["Length", "Width"]
     )
 
 if len(dimensions) == 0:
