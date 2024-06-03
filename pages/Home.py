@@ -1,23 +1,15 @@
 import streamlit as st
 from streamlit_option_menu import option_menu
 
+# Import other page scripts
+from pages import General_Information, Crop_Assist, Dimension_Manager
+
 def main():
     query_params = st.experimental_get_query_params()
     page = query_params.get("page", ["home"])[0]
 
-    if page == "home":
-        selected = "Home"
-    elif page == "general_info":
-        selected = "General Information"
-    elif page == "crop_assist":
-        selected = "Crop Assist"
-    elif page == "dimension_manager":
-        selected = "Dimension Manager"
-    else:
-        selected = "Home"
-
     st.sidebar.image('logo_ata.png', use_column_width=True)
-    
+
     with st.sidebar:
         selected = option_menu(
             menu_title="Main Menu",
@@ -41,11 +33,11 @@ def main():
             - With 🗺️ DimensionManager, you will be able to get all the detected Dimension organized into the corresponding lengths and widths.
         """)
     elif selected == "General Information":
-        st.write("## General Information Page")
+        General_Information.main()
     elif selected == "Crop Assist":
-        st.write("## Crop Assist Page")
+        Crop_Assist.main()
     elif selected == "Dimension Manager":
-        st.write("## Dimension Manager Page")
+        Dimension_Manager.main()
 
 if __name__ == "__main__":
     main()
