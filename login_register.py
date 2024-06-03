@@ -35,6 +35,7 @@ def login_user(email, password):
         user_info = auth.verify_id_token(id_token)
         st.session_state.user = user_info
         st.session_state.logged_in = True
+        redirect_to_home()  # Redirect to home page after successful login
         return True
     else:
         return False
@@ -71,7 +72,6 @@ def login_app():
             if st.button("Login"):
                 if login_user(email, password):
                     st.success("Logged in successfully!")
-                    redirect_to_home()
                 else:
                     st.error("Invalid email or password")
 
@@ -81,8 +81,5 @@ def login_app():
             if st.button("Register"):
                 if register_user(new_email, new_password):
                     st.success("Registered and logged in successfully!")
-                    redirect_to_home()
                 else:
                     st.error("Registration failed")
-
-   # menu()  # Render the dynamic menu!
