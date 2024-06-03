@@ -1,6 +1,7 @@
 import streamlit as st
 from firebase_admin import auth, credentials, initialize_app
 import requests
+import Home
 
 # Initialize Firebase app if not already initialized
 try:
@@ -35,6 +36,7 @@ def login_user(email, password):
         user_info = auth.verify_id_token(id_token)
         st.session_state.user = user_info
         st.session_state.logged_in = True
+        Home.main()  # Display Home page upon successful login
         return True
     else:
         return False
