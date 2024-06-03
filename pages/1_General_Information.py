@@ -5,7 +5,10 @@ st.sidebar.page_link("pages/Home.py", label="Home")
 st.sidebar.page_link("pages/1_General_Information.py", label="General Information")
 st.sidebar.page_link("pages/Crop_Assist.py", label="Crop Assist")
 st.sidebar.page_link("pages/Dimension_Manager.py", label="Dimension Manager")
-st.markdown('How to use the application?')
+
+def app():
+  st.markdown('How to use the application?')
+
 
 #video_file = open('myvideo.mp4', 'rb')
 #video_bytes = video_file.read()
