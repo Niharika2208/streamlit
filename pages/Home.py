@@ -12,10 +12,10 @@ def main():
         home_app()
     elif page == "General Information":
         General_Information.app()
-    elif page == "Crop Assist":
-        Crop_Assist.app()
-    elif page == "Dimension Manager":
-        Dimension_Manager.app()
+   # elif page == "Crop Assist":
+    #    Crop_Assist.app()
+    #elif page == "Dimension Manager":
+    #    Dimension_Manager.app()
 
 def home_app():
     # SurViZ logo
