@@ -35,10 +35,9 @@ def login_user(email, password):
         user_info = auth.verify_id_token(id_token)
         st.session_state.user = user_info
         st.session_state.logged_in = True
-        st.experimental_rerun()  # Rerun the script to reflect the logged-in state
-        st.experimental_redirect("home")  # Redirect to home page
+        return True
     else:
-        st.error("Invalid email or password")
+        return False
 
 def register_user(email, password):
     payload = {
@@ -48,11 +47,14 @@ def register_user(email, password):
     }
     response = requests.post(FIREBASE_SIGNUP_URL, json=payload)
     if response.status_code == 200:
-        login_user(email, password)
-        st.experimental_rerun()  # Rerun the script to reflect the logged-in state
-        st.experimental_redirect("home")  # Redirect to home page
+        return login_user(email, password)
     else:
         st.error(f"Registration failed: {response.json()}")  # Print detailed error response
+        return False
+
+def redirect_to_home():
+    # Redirect to Home page by setting query parameters
+    st.experimental_set_query_params(page="home")
 
 def login_app():
     if "logged_in" not in st.session_state:
@@ -61,18 +63,26 @@ def login_app():
     if not st.session_state.logged_in:
         st.title("Login or Register")
 
-        tab1, tab2 = st.columns(2)
+        tab1, tab2 = st.tabs(["Login", "Register"])
 
         with tab1:
             email = st.text_input("Email")
             password = st.text_input("Password", type="password")
             if st.button("Login"):
-                login_user(email, password)
+                if login_user(email, password):
+                    st.success("Logged in successfully!")
+                    redirect_to_home()
+                else:
+                    st.error("Invalid email or password")
 
         with tab2:
             new_email = st.text_input("New Email")
             new_password = st.text_input("New Password", type="password")
             if st.button("Register"):
-                register_user(new_email, new_password)
+                if register_user(new_email, new_password):
+                    st.success("Registered and logged in successfully!")
+                    redirect_to_home()
+                else:
+                    st.error("Registration failed")
 
-login_app()
+   # menu()  # Render the dynamic menu!
