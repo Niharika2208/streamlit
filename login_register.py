@@ -1,7 +1,7 @@
 import streamlit as st
 from firebase_admin import auth, credentials, initialize_app
 import requests
-import Home
+from pages import Home
 
 # Initialize Firebase app if not already initialized
 try:
