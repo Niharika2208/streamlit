@@ -14,7 +14,7 @@ def main():
         selected = option_menu(
             menu_title="Main Menu",
             options=["Home", "General Information", "Crop Assist", "Dimension Manager"],
-            icons=["house", "info", "crop", "ruler"],
+            icons=["house", "info", "crop", "dashboard"],
             menu_icon="cast",
             default_index=0,
         )
