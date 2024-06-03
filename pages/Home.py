@@ -1,6 +1,6 @@
 import streamlit as st
 import matplotlib.image as mpimg
-from pages import 1_General_Information, Crop_Assist, Dimension_Manager
+from pages import General_Information, Crop_Assist, Dimension_Manager
 
 def main():
     # Create the sidebar for navigation
