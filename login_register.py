@@ -1,7 +1,7 @@
 import streamlit as st
 from firebase_admin import auth, credentials, initialize_app
 import requests
-from pages import Home
+import streamlit.components.v1 as components
 
 # Initialize Firebase app if not already initialized
 try:
@@ -36,7 +36,8 @@ def login_user(email, password):
         user_info = auth.verify_id_token(id_token)
         st.session_state.user = user_info
         st.session_state.logged_in = True
-        Home.main()  # Display Home page upon successful login
+        st.markdown("<h1>Home Page</h1>", unsafe_allow_html=True)  # Display Home page header
+        components.iframe("http://localhost:8501/pages/Home.py", width=1000, height=600)  # Embed Home.py content in an iframe
         return True
     else:
         return False
