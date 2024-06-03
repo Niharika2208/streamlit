@@ -1,41 +1,51 @@
-import matplotlib.pyplot as plt
 import streamlit as st
-import matplotlib.image as mpimg
-from menu import menu
-
-#st.set_page_config(
-#     page_title="Home page",
-#     page_icon="👋",
-#     layout="centered") 
-
-st.sidebar.page_link("pages/Home.py", label="Home")
-st.sidebar.page_link("pages/1_General_Information.py", label="General Information")
-st.sidebar.page_link("pages/Crop_Assist.py", label="Crop Assist")
-st.sidebar.page_link("pages/Dimension_Manager.py", label="Dimension Manager")
+from streamlit_option_menu import option_menu
 
 def main():
+    query_params = st.experimental_get_query_params()
+    page = query_params.get("page", ["home"])[0]
 
+    if page == "home":
+        selected = "Home"
+    elif page == "general_info":
+        selected = "General Information"
+    elif page == "crop_assist":
+        selected = "Crop Assist"
+    elif page == "dimension_manager":
+        selected = "Dimension Manager"
+    else:
+        selected = "Home"
 
-    # SurViZ logo
-    st.image('logo_ata.png')
+    st.sidebar.image('logo_ata.png', use_column_width=True)
+    
+    with st.sidebar:
+        selected = option_menu(
+            menu_title="Main Menu",
+            options=["Home", "General Information", "Crop Assist", "Dimension Manager"],
+            icons=["house", "info", "crop", "ruler"],
+            menu_icon="cast",
+            default_index=0,
+        )
 
-    # Main Description
-    st.markdown("## 👋 Welcome to the Dimension Detection tool!")
-    st.markdown("Developed by the Team Quadratech")
-    st.markdown("The app is still under development.")
+    if selected == "Home":
+        st.markdown("## 👋 Welcome to the Dimension Detection tool!")
+        st.markdown("Developed by the Team Quadratech")
+        st.markdown("The app is still under development.")
+        st.markdown("""
+            ### Select on the left panel what you want to explore:
 
-    # Description of the features. 
-    st.markdown(
-        """
-        ### Select on the left panel what you want to explore:
+            - With 🔭 General info, you will have a short description of what this tool can do and how to use it.
+            
+            - With 📈 CropAssist, you will be able to Upload the drawings and get the dimensions.
 
-        - With 🔭 General info, you will have a short description of what this tool can do and how to use it.
-        
-        - With 📈CropAssist, you will be able to Upload the drawings and get the dimensions.
-
-        - With 🗺️ DimensionManager, you will be able to get all the detected Dimension organised into the corresponding lengths and widths.
-        """
-    )
+            - With 🗺️ DimensionManager, you will be able to get all the detected Dimension organized into the corresponding lengths and widths.
+        """)
+    elif selected == "General Information":
+        st.write("## General Information Page")
+    elif selected == "Crop Assist":
+        st.write("## Crop Assist Page")
+    elif selected == "Dimension Manager":
+        st.write("## Dimension Manager Page")
 
 if __name__ == "__main__":
     main()
